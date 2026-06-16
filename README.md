@@ -142,3 +142,74 @@ opencode
 ```
 
 The default model is `openai/gpt-5.5`, and the small model is `anthropic/claude-haiku-4-5`.
+
+## Install Palantir MCP
+
+Palantir MCP lets OpenCode use Foundry tools through the Model Context Protocol. The Palantir wrapper package is `palantir-mcp` and runs through `npx`.
+
+Requirements:
+
+- Node.js 18 or newer
+- access to a Foundry enrollment
+- a valid Foundry user token in `FOUNDRY_TOKEN`
+
+Add your Foundry environment variables to `~/.zshrc`:
+
+```sh
+cat >> ~/.zshrc <<'EOF'
+
+# Palantir MCP configuration
+export FOUNDRY_HOST="<enrollment>.palantirfoundry.com"
+export FOUNDRY_TOKEN="<foundry-token>"
+EOF
+```
+
+Reload your shell config:
+
+```sh
+source ~/.zshrc
+```
+
+Verify the variables are present without printing the token:
+
+```sh
+test -n "$FOUNDRY_HOST" && echo "FOUNDRY_HOST is set"
+test -n "$FOUNDRY_TOKEN" && echo "FOUNDRY_TOKEN is set"
+```
+
+Add the Palantir MCP server to the top level of `~/.config/opencode/opencode.jsonc`:
+
+```jsonc
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "palantir": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "palantir-mcp",
+        "--foundry-api-url",
+        "https://<enrollment>.palantirfoundry.com"
+      ],
+      "environment": {
+        "FOUNDRY_TOKEN": "{env:FOUNDRY_TOKEN}"
+      },
+      "enabled": true
+    }
+  }
+}
+```
+
+Replace `<enrollment>.palantirfoundry.com` with the same host you set in `FOUNDRY_HOST`. Keep the actual token out of `opencode.jsonc`; the MCP config should read it from the environment.
+
+If you want to test Palantir MCP before using it in OpenCode, run:
+
+```sh
+npx @modelcontextprotocol/inspector \
+  npx -y palantir-mcp \
+  --foundry-api-url \
+  "https://$FOUNDRY_HOST"
+```
+
+Restart OpenCode after adding or changing MCP config. Once it starts, you can ask OpenCode to use the `palantir` MCP tools in your prompt.
