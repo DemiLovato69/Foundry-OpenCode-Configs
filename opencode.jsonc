@@ -1,0 +1,153 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "openai/gpt-5.5",
+  "small_model": "anthropic/claude-haiku-4-5",
+  "autoupdate": false,
+  "share": "disabled",
+  "enabled_providers": [
+    "openai",
+    "anthropic",
+    "google",
+    "xai"
+  ],
+  "plugin": [
+    "./plugins/ponytail.mjs", 
+    "./plugins/lms-responses-compat.js"
+  ],
+  "provider": {
+    "openai": {
+      "name": "OpenAI",
+      "env": [
+        "OPENCODE_API_KEY"
+      ],
+      "npm": "@ai-sdk/openai",
+      "whitelist": [
+        "gpt-5.5",
+        "gpt-5.4",
+        "gpt-5.4-mini",
+        "gpt-5.4-nano",
+        "gpt-5.3-codex",
+        "gpt-5.2",
+        "gpt-5.2-codex",
+        "gpt-5.1",
+        "gpt-5.1-codex",
+        "gpt-5.1-codex-max",
+        "gpt-5.1-codex-mini",
+        "gpt-5",
+        "gpt-5-codex",
+        "gpt-5-mini",
+        "gpt-5-nano",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "gpt-4o",
+        "o3",
+        "o4-mini"
+      ],
+      "models": {
+        "gpt-5.5": { "id": "gpt-5.5", "name": "GPT-5.5" },
+        "gpt-5.4": { "id": "gpt-5.4", "name": "GPT-5.4" },
+        "gpt-5.4-mini": { "id": "gpt-5.4-mini", "name": "GPT-5.4 mini" },
+        "gpt-5.4-nano": { "id": "gpt-5.4-nano", "name": "GPT-5.4 nano" },
+        "gpt-5.3-codex": { "id": "gpt-5.3-codex", "name": "GPT-5.3 Codex" },
+        "gpt-5.2": { "id": "gpt-5.2", "name": "GPT-5.2" },
+        "gpt-5.2-codex": { "id": "gpt-5.2-codex", "name": "GPT-5.2 Codex" },
+        "gpt-5.1": { "id": "gpt-5.1", "name": "GPT-5.1" },
+        "gpt-5.1-codex": { "id": "gpt-5.1-codex", "name": "GPT-5.1 Codex" },
+        "gpt-5.1-codex-max": { "id": "gpt-5.1-codex-max", "name": "GPT-5.1 Codex max" },
+        "gpt-5.1-codex-mini": { "id": "gpt-5.1-codex-mini", "name": "GPT-5.1 Codex mini" },
+        "gpt-5": { "id": "gpt-5", "name": "GPT-5" },
+        "gpt-5-codex": { "id": "gpt-5-codex", "name": "GPT-5 Codex" },
+        "gpt-5-mini": { "id": "gpt-5-mini", "name": "GPT-5 mini" },
+        "gpt-5-nano": { "id": "gpt-5-nano", "name": "GPT-5 nano" },
+        "gpt-4.1": { "id": "gpt-4.1", "name": "GPT-4.1" },
+        "gpt-4.1-mini": { "id": "gpt-4.1-mini", "name": "GPT-4.1 mini" },
+        "gpt-4.1-nano": { "id": "gpt-4.1-nano", "name": "GPT-4.1 nano" },
+        "gpt-4o": { "id": "gpt-4o", "name": "GPT-4o" },
+        "o3": { "id": "o3", "name": "o3" },
+        "o4-mini": { "id": "o4-mini", "name": "o4-mini" }
+      },
+      "options": {
+        "baseURL": "{env:OPENCODE_BASE_URL}/api/v2/llm/proxy/openai/v1",
+        "apiKey": "no-api-key",
+        "timeout": false,
+        "headers": { "Authorization": "Bearer {env:OPENCODE_API_KEY}" }
+      }
+    },
+    "anthropic": {
+      "name": "Anthropic",
+      "env": ["OPENCODE_API_KEY"],
+      "whitelist": [
+        "claude",
+        "claude-4",
+        "claude-haiku-4-5",
+        "claude-opus-4-1",
+        "claude-opus-4-5",
+        "claude-opus-4-6",
+        "claude-opus-4-7",
+        "claude-opus-4-8",
+        "claude-sonnet-4-5",
+        "claude-sonnet-4-6"
+      ],
+      "models": {
+        "claude": { "id": "claude", "name": "Claude", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } },
+        "claude-4": { "id": "claude-4", "name": "Claude 4", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } },
+        "claude-haiku-4-5": { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 4000 } } },
+        "claude-opus-4-1": { "id": "claude-opus-4-1", "name": "Claude Opus 4.1", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } },
+        "claude-opus-4-5": { "id": "claude-opus-4-5", "name": "Claude Opus 4.5", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } },
+        "claude-opus-4-6": { "id": "claude-opus-4-6", "name": "Claude Opus 4.6", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } },
+        "claude-opus-4-7": { "id": "claude-opus-4-7", "name": "Claude Opus 4.7", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } },
+        "claude-opus-4-8": { "id": "claude-opus-4-8", "name": "Claude Opus 4.8", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } },
+        "claude-sonnet-4-5": { "id": "claude-sonnet-4-5", "name": "Claude Sonnet 4.5", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } },
+        "claude-sonnet-4-6": { "id": "claude-sonnet-4-6", "name": "Claude Sonnet 4.6", "modalities": { "input": ["text", "image", "pdf"], "output": ["text"] }, "options": { "thinking": { "type": "enabled", "budgetTokens": 16000 } } }
+      },
+      "options": {
+        "baseURL": "{env:OPENCODE_BASE_URL}/api/v2/llm/proxy/anthropic/v1",
+        "apiKey": "no-api-key",
+        "timeout": false,
+        "headers": { "Authorization": "Bearer {env:OPENCODE_API_KEY}" }
+      }
+    },
+    "google": {
+      "name": "Google",
+      "env": ["OPENCODE_API_KEY"],
+      "npm": "@ai-sdk/google",
+      "whitelist": ["2-5-flash", "2-5-flash-lite", "2-5-pro", "3-1-pro", "3-5-flash", "3-flash", "gemini-3-1-flash-lite"],
+      "models": {
+        "2-5-flash": { "id": "2-5-flash", "name": "Gemini 2.5 Flash", "options": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 1024 } } },
+        "2-5-flash-lite": { "id": "2-5-flash-lite", "name": "Gemini 2.5 Flash Lite", "options": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 1024 } } },
+        "2-5-pro": { "id": "2-5-pro", "name": "Gemini 2.5 Pro", "options": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 1024 } } },
+        "3-1-pro": { "id": "3-1-pro", "name": "Gemini 3.1 Pro", "options": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 1024 } } },
+        "3-5-flash": { "id": "3-5-flash", "name": "Gemini 3.5 Flash", "options": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 1024 } } },
+        "3-flash": { "id": "3-flash", "name": "Gemini 3 Flash", "options": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 1024 } } },
+        "gemini-3-1-flash-lite": { "id": "gemini-3-1-flash-lite", "name": "Gemini 3.1 Flash Lite", "options": { "thinkingConfig": { "includeThoughts": true, "thinkingBudget": 1024 } } }
+      },
+      "options": {
+        "baseURL": "{env:OPENCODE_BASE_URL}/api/v2/llm/proxy/google/v1",
+        "apiKey": "no-api-key",
+        "timeout": false,
+        "headers": { "Authorization": "Bearer {env:OPENCODE_API_KEY}" }
+      }
+    },
+    "xai": {
+      "name": "xAI",
+      "env": ["OPENCODE_API_KEY"],
+      "npm": "@ai-sdk/xai",
+      "whitelist": ["grok-4.3", "grok-build-0-1"],
+      "models": {
+        "grok-4.3": { "id": "grok-4.3", "name": "Grok 4.3" },
+        "grok-build-0-1": { "id": "grok-build-0-1", "name": "Grok Build 0.1" }
+      },
+      "options": {
+        "baseURL": "{env:OPENCODE_BASE_URL}/api/v2/llm/proxy/xai/v1",
+        "apiKey": "no-api-key",
+        "timeout": false,
+        "headers": { "Authorization": "Bearer {env:OPENCODE_API_KEY}" }
+      }
+    }
+  },
+  "permission": {
+    "bash": "ask",
+    "edit": "allow"
+  }
+}

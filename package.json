@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.82",
+    "@ai-sdk/google": "^3.0.80",
+    "@ai-sdk/openai": "^3.0.69",
+    "@ai-sdk/xai": "^3.0.93",
+    "@opencode-ai/plugin": "1.17.3"
+  }
+}
