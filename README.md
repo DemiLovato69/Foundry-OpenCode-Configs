@@ -151,30 +151,14 @@ Requirements:
 
 - Node.js 18 or newer
 - access to a Foundry enrollment
-- a valid Foundry user token in `FOUNDRY_TOKEN`
+- `OPENCODE_BASE_URL` set to the Foundry URL
+- `OPENCODE_API_KEY` set to the Foundry token
 
-Add your Foundry environment variables to `~/.zshrc`:
-
-```sh
-cat >> ~/.zshrc <<'EOF'
-
-# Palantir MCP configuration
-export FOUNDRY_HOST="<enrollment>.palantirfoundry.com"
-export FOUNDRY_TOKEN="<foundry-token>"
-EOF
-```
-
-Reload your shell config:
+Verify the OpenCode variables are present without printing the token:
 
 ```sh
-source ~/.zshrc
-```
-
-Verify the variables are present without printing the token:
-
-```sh
-test -n "$FOUNDRY_HOST" && echo "FOUNDRY_HOST is set"
-test -n "$FOUNDRY_TOKEN" && echo "FOUNDRY_TOKEN is set"
+test -n "$OPENCODE_BASE_URL" && echo "OPENCODE_BASE_URL is set"
+test -n "$OPENCODE_API_KEY" && echo "OPENCODE_API_KEY is set"
 ```
 
 Add the Palantir MCP server to the top level of `~/.config/opencode/opencode.jsonc`:
@@ -190,10 +174,10 @@ Add the Palantir MCP server to the top level of `~/.config/opencode/opencode.jso
         "-y",
         "palantir-mcp",
         "--foundry-api-url",
-        "https://<enrollment>.palantirfoundry.com"
+        "{env:OPENCODE_BASE_URL}"
       ],
       "environment": {
-        "FOUNDRY_TOKEN": "{env:FOUNDRY_TOKEN}"
+        "FOUNDRY_TOKEN": "{env:OPENCODE_API_KEY}"
       },
       "enabled": true
     }
@@ -201,7 +185,7 @@ Add the Palantir MCP server to the top level of `~/.config/opencode/opencode.jso
 }
 ```
 
-Replace `<enrollment>.palantirfoundry.com` with the same host you set in `FOUNDRY_HOST`. Keep the actual token out of `opencode.jsonc`; the MCP config should read it from the environment.
+Keep the actual token out of `opencode.jsonc`; the MCP config should read it from `OPENCODE_API_KEY`. Palantir MCP expects the token in an environment variable named `FOUNDRY_TOKEN`, so the config maps `OPENCODE_API_KEY` to `FOUNDRY_TOKEN` for the MCP process.
 
 If you want to test Palantir MCP before using it in OpenCode, run:
 
@@ -209,7 +193,7 @@ If you want to test Palantir MCP before using it in OpenCode, run:
 npx @modelcontextprotocol/inspector \
   npx -y palantir-mcp \
   --foundry-api-url \
-  "https://$FOUNDRY_HOST"
+  "$OPENCODE_BASE_URL"
 ```
 
 Restart OpenCode after adding or changing MCP config. Once it starts, you can ask OpenCode to use the `palantir` MCP tools in your prompt.
