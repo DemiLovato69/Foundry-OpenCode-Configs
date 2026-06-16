@@ -149,5 +149,16 @@
   "permission": {
     "bash": "ask",
     "edit": "allow"
+  },
+  "mcp": { 
+    "palantir": { 
+      "type": "local",
+      "command": [
+        "sh",
+        "-c",
+        "FOUNDRY_TOKEN=\"$OPENCODE_API_KEY\" exec npx -y palantir-mcp --foundry-api-url \"$OPENCODE_BASE_URL\""
+      ],
+      "enabled": true
+    }
   }
 }

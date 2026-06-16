@@ -170,22 +170,17 @@ Add the Palantir MCP server to the top level of `~/.config/opencode/opencode.jso
     "palantir": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "palantir-mcp",
-        "--foundry-api-url",
-        "{env:OPENCODE_BASE_URL}"
+        "sh",
+        "-c",
+        "FOUNDRY_TOKEN=\"$OPENCODE_API_KEY\" exec npx -y palantir-mcp --foundry-api-url \"$OPENCODE_BASE_URL\""
       ],
-      "environment": {
-        "FOUNDRY_TOKEN": "{env:OPENCODE_API_KEY}"
-      },
       "enabled": true
     }
   }
 }
 ```
 
-Keep the actual token out of `opencode.jsonc`; the MCP config should read it from `OPENCODE_API_KEY`. Palantir MCP expects the token in an environment variable named `FOUNDRY_TOKEN`, so the config maps `OPENCODE_API_KEY` to `FOUNDRY_TOKEN` for the MCP process.
+Keep the actual token out of `opencode.jsonc`; the MCP command reads it from `OPENCODE_API_KEY`. Palantir MCP expects the token in an environment variable named `FOUNDRY_TOKEN`, so the command maps `OPENCODE_API_KEY` to `FOUNDRY_TOKEN` only for the MCP process.
 
 If you want to test Palantir MCP before using it in OpenCode, run:
 
