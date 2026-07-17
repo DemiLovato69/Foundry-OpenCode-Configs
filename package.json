@@ -5,6 +5,6 @@
     "@ai-sdk/openai": "^3.0.69",
     "@ai-sdk/openai-compatible": "^2.0.51",
     "@ai-sdk/xai": "^3.0.93",
-    "@opencode-ai/plugin": "1.17.3"
+    "@opencode-ai/plugin": "1.17.10"
   }
 }
