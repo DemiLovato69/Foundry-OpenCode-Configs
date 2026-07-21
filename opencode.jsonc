@@ -103,6 +103,7 @@
                 "baseURL": "{env:OPENCODE_BASE_URL}/api/v2/llm/proxy/openai/v1",
                 "apiKey": "no-api-key",
                 "timeout": false,
+                "headerTimeout": 60000,
                 "headers": { "Authorization": "Bearer {env:OPENCODE_API_KEY}" }
             }
         },
