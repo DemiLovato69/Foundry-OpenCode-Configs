@@ -375,7 +375,7 @@
         }
     },
     "permission": {
-        "bash": "ask",
+        "bash": "allow",
         "edit": "allow",
         "lsp": "allow"
     },
