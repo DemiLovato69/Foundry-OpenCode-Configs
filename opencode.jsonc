@@ -8,7 +8,8 @@
     "plugin": [
         "./plugins/ponytail.mjs",
         "./plugins/lms-responses-compat.js",
-        "./plugins/tabby-compat.mjs"
+        "./plugins/tabby-compat.mjs",
+        "context-mode"
     ],
     "provider": {
         "openai": {
