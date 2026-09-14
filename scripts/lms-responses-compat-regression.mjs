@@ -64,7 +64,7 @@ function inputTexts(value, result = []) {
 }
 
 const body = {
-    model: "gpt-5.6-terra",
+    model: "gpt-6-astra",
     input: [pdfMessage()],
     reasoning: { summary: "auto", effort: "medium" },
     text: { verbosity: "high" },
@@ -76,7 +76,7 @@ const json = JSON.stringify(normalized);
 
 assert.equal(
     normalized.model,
-    "ri.language-model-service..language-model.gpt-5-6-terra",
+    "ri.language-model-service..language-model.gpt-6-astra",
 );
 assert.equal(json.includes('"type":"input_file"'), false);
 assert.equal(json.includes('"type":"input_image"'), true);

@@ -39,6 +39,7 @@ const GOOGLE_ALLOWED_THINKING_CONFIG = new Set([
 ]);
 
 const OPENAI_MODEL_RIDS = {
+    "gpt-6-astra": "ri.language-model-service..language-model.gpt-6-astra",
     "gpt-5.6-sol": "ri.language-model-service..language-model.gpt-5-6-sol",
     "gpt-5.6-terra": "ri.language-model-service..language-model.gpt-5-6-terra",
     "gpt-5.6-luna": "ri.language-model-service..language-model.gpt-5-6-luna",

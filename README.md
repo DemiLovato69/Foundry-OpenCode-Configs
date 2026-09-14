@@ -141,7 +141,7 @@ From any project directory:
 opencode
 ```
 
-The default model is `openai/gpt-5.5`, and the small model is `anthropic/claude-haiku-4-5`.
+The default model is `openai/gpt-6-astra`, and the small model is `openai/gpt`.
 
 ## Install Palantir MCP
 
