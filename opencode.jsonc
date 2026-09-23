@@ -5,10 +5,7 @@
     "autoupdate": false,
     "share": "disabled",
     "enabled_providers": ["openai", "anthropic"],
-    "plugin": [
-        "./plugins/ponytail.mjs",
-        "./plugins/lms-responses-compat.js"
-    ],
+    "plugin": ["./plugins/ponytail.mjs", "./plugins/lms-responses-compat.js"],
     "provider": {
         "openai": {
             "name": "OpenAI",
@@ -251,7 +248,7 @@
         }
     },
     "permission": {
-        "bash": "ask",
+        "bash": "allow",
         "edit": "allow",
         "lsp": "allow"
     },
