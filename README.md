@@ -1,6 +1,6 @@
 # OpenCode Config
 
-Personal OpenCode configuration for routing OpenAI, Anthropic, Google, and xAI models through the same proxy endpoint. Ponytail is installed by default through the `plugin` array in `opencode.jsonc`; remove `./plugins/ponytail.mjs` from that array if you do not want Ponytail enabled.
+Personal OpenCode configuration for routing OpenAI and Anthropic models through the Palantir proxy. Ponytail is installed by default through the `plugin` array in `opencode.jsonc`; remove `./plugins/ponytail.mjs` from that array if you do not want Ponytail enabled.
 
 ## Install OpenCode
 
@@ -76,8 +76,6 @@ export OPENCODE_API_KEY="your-foundry-token"
 ```text
 ${OPENCODE_BASE_URL}/api/v2/llm/proxy/openai/v1
 ${OPENCODE_BASE_URL}/api/v2/llm/proxy/anthropic/v1
-${OPENCODE_BASE_URL}/api/v2/llm/proxy/google/v1
-${OPENCODE_BASE_URL}/api/v2/llm/proxy/xai/v1
 ```
 
 `OPENCODE_API_KEY` is sent as:
@@ -86,19 +84,9 @@ ${OPENCODE_BASE_URL}/api/v2/llm/proxy/xai/v1
 Authorization: Bearer ${OPENCODE_API_KEY}
 ```
 
-### Foundry Token
-
-If you already have a Foundry token in `FOUNDRY_TOKEN`, it is enough to set the OpenCode token from it:
-
-```sh
-export OPENCODE_API_KEY=$(echo $FOUNDRY_TOKEN)
-```
-
 ## Add Variables To zshrc
 
 Add the exports to `~/.zshrc` so new terminal sessions have them automatically.
-
-For a direct OpenCode token:
 
 ```sh
 cat >> ~/.zshrc <<'EOF'
@@ -106,17 +94,6 @@ cat >> ~/.zshrc <<'EOF'
 # OpenCode proxy configuration
 export OPENCODE_BASE_URL="https://your-foundry-stack.palantir.com"
 export OPENCODE_API_KEY="your-foundry-token"
-EOF
-```
-
-For a Foundry token:
-
-```sh
-cat >> ~/.zshrc <<'EOF'
-
-# OpenCode proxy configuration
-export OPENCODE_BASE_URL="https://your-foundry-stack.palantir.com"
-export OPENCODE_API_KEY=$(echo $FOUNDRY_TOKEN)
 EOF
 ```
 
@@ -141,7 +118,11 @@ From any project directory:
 opencode
 ```
 
-The default model is `openai/gpt-5.5`, and the small model is `anthropic/claude-haiku-4-5`.
+The default model is `openai/gpt-6-sol`, and the small model is `openai/gpt-6-luna`.
+
+The Palantir compatibility plugin translates model IDs and removes unsupported request fields. OpenAI `input_file` attachments, including PDFs, are rejected instead of rendered; use supported text or image inputs.
+
+OpenChamber 1.24.2 selects `small_model` from this config unless its own Small Model setting overrides it. Its background requests bypass OpenCode plugins and read the provider's `baseURL` directly, so the `{env:OPENCODE_BASE_URL}` placeholder and the LMS model-ID translations in this config do not apply there. Selecting Luna in OpenChamber does not by itself make its background generation work through this proxy.
 
 ## Install Palantir MCP
 
